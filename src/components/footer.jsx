@@ -17,25 +17,7 @@ with comfort and best prices.
 
 <div className="footer-links">
 
-<span>Home</span>
-
-<span>About</span>
-
-<span>Bookings</span>
-
 <span>Support</span>
-
-</div>
-
-<div className="footer-socials">
-
-<span>🌐</span>
-
-<span>📷</span>
-
-<span>🐦</span>
-
-<span>📘</span>
 
 </div>
 

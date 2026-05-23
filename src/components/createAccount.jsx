@@ -116,6 +116,20 @@ function CreateAccount() {
                     value={form.password}
                     onChange={handleChange}
                 />
+                <input
+                    type="text"
+                    placeholder="address"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                />
+                <input
+                    type="Number"
+                    placeholder="Year of Birth"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                />
 
                 <button type="submit" className="create-account-button" >
                     Create Account
