@@ -16,8 +16,9 @@ function Payment() {
         date,
         selectedSeat,
         passengers,
-        name
+        name,isboard
     } = location.state || {};
+    console.log(isboard)
 
     const [paymentMethod,
         setPaymentMethod] = useState("UPI");
@@ -28,33 +29,16 @@ function Payment() {
 
     function handlePayment() {
 
-        setLoading(true);
+    setLoading(true);
 
-        setTimeout(() => {
+    setTimeout(() => {
 
-            navigate(
-                "/boardingpass",
-                {
+        navigate("/Mybookings");
 
-                    state: {
+    }, 3000);
 
-                        flight,
-                        departure,
-                        destination,
-                        date,
-                        selectedSeat,
-                        passengers,
-                        totalAmount,
-                        name
+}
 
-                    }
-
-                }
-            );
-
-        }, 3000);
-
-    }
 
     return (
 
@@ -79,17 +63,25 @@ function Payment() {
                 <div className="payment-methods">
 
                     <div
+
                         className={
+
                             paymentMethod === "UPI"
+
                             ?
+
                             "payment-option active-payment"
+
                             :
+
                             "payment-option"
+
                         }
 
                         onClick={() =>
                             setPaymentMethod("UPI")
                         }
+
                     >
 
                         UPI
@@ -98,17 +90,25 @@ function Payment() {
 
 
                     <div
+
                         className={
+
                             paymentMethod === "Card"
+
                             ?
+
                             "payment-option active-payment"
+
                             :
+
                             "payment-option"
+
                         }
 
                         onClick={() =>
                             setPaymentMethod("Card")
                         }
+
                     >
 
                         Card
@@ -117,17 +117,25 @@ function Payment() {
 
 
                     <div
+
                         className={
+
                             paymentMethod === "NetBanking"
+
                             ?
+
                             "payment-option active-payment"
+
                             :
+
                             "payment-option"
+
                         }
 
                         onClick={() =>
                             setPaymentMethod("NetBanking")
                         }
+
                     >
 
                         Net Banking
@@ -234,9 +242,13 @@ function Payment() {
                     {
 
                         loading
+
                         ?
+
                         "Processing Payment..."
+
                         :
+
                         `Pay ₹${totalAmount}`
 
                     }

@@ -13,11 +13,16 @@ function SeatSelection() {
         departure,
         destination,
         date,
-        passengers
+        passengers,
+        isboard
     } = location.state || {};
 
-    const [selectedSeat, setSelectedSeat] = useState("");
 
+    // MULTIPLE SELECTED SEATS
+    const [selectedSeats, setSelectedSeats] = useState([]);
+
+
+    // BOOKED SEATS
     const bookedSeats = [
 
         "1B",
@@ -27,16 +32,21 @@ function SeatSelection() {
 
     ];
 
+
+
+    // SEAT ROWS
     const seats = [
 
-        ["1A","1B","1C","1D"],
-        ["2A","2B","2C","2D"],
-        ["3A","3B","3C","3D"],
-        ["4A","4B","4C","4D"],
-        ["5A","5B","5C","5D"],
-        ["6A","6B","6C","6D"]
+        ["1A", "1B", "1C", "1D"],
+        ["2A", "2B", "2C", "2D"],
+        ["3A", "3B", "3C", "3D"],
+        ["4A", "4B", "4C", "4D"],
+        ["5A", "5B", "5C", "5D"],
+        ["6A", "6B", "6C", "6D"]
 
     ];
+
+
 
     return (
 
@@ -65,6 +75,7 @@ function SeatSelection() {
             </div>
 
 
+
             {/* AIRPLANE */}
 
             <div className="airplane-wrapper">
@@ -79,6 +90,7 @@ function SeatSelection() {
                     <div className="cockpit-glass2"></div>
 
                 </div>
+
 
 
                 {/* BODY */}
@@ -98,11 +110,14 @@ function SeatSelection() {
 
                                     row.map((seat, seatIndex) => {
 
+                                        // BOOKED CHECK
                                         const isBooked =
                                             bookedSeats.includes(seat);
 
+                                        // SELECTED CHECK
                                         const isSelected =
-                                            selectedSeat === seat;
+                                            selectedSeats.includes(seat);
+
 
                                         return (
 
@@ -113,21 +128,73 @@ function SeatSelection() {
 
                                                 <button
 
-                                                    disabled={isBooked}
+                                                    disabled={
 
-                                                    onClick={() =>
-                                                        setSelectedSeat(seat)
+                                                        isBooked ||
+
+                                                        (
+                                                            selectedSeats.length >= passengers &&
+                                                            !selectedSeats.includes(seat)
+                                                        )
+
                                                     }
+
+                                                    onClick={() => {
+
+                                                        // REMOVE SEAT
+                                                        if (
+                                                            selectedSeats.includes(seat)
+                                                        ) {
+
+                                                            setSelectedSeats(
+
+                                                                selectedSeats.filter(
+
+                                                                    (s) => s !== seat
+
+                                                                )
+
+                                                            );
+
+                                                        }
+
+                                                        // ADD SEAT
+                                                        else {
+
+                                                            if (selectedSeats.length < passengers) {
+
+                                                                setSelectedSeats([
+
+                                                                    ...selectedSeats,
+                                                                    seat
+
+                                                                ]);
+
+                                                            }
+
+                                                            else {
+
+                                                                alert(
+                                                                    `You can only select ${passengers} seats`
+                                                                );
+
+
+                                                            }
+
+                                                        }
+
+                                                    }}
+
 
                                                     className={
 
                                                         isBooked
-                                                        ? "seat booked-seat"
+                                                            ? "seat booked-seat"
 
-                                                        : isSelected
-                                                        ? "seat selected-seat"
+                                                            : isSelected
+                                                                ? "seat selected-seat"
 
-                                                        : "seat"
+                                                                : "seat"
 
                                                     }
 
@@ -137,6 +204,9 @@ function SeatSelection() {
 
                                                 </button>
 
+
+
+                                                {/* AISLE */}
 
                                                 {
 
@@ -165,18 +235,35 @@ function SeatSelection() {
             </div>
 
 
+
             {/* BOTTOM */}
 
             <div className="seat-bottom">
 
                 <h2>
 
-                    Selected Seat:
+                    Selected Seats :
+
                     <span>
-                        {selectedSeat || " None"}
+
+                        {
+
+                            selectedSeats.length > 0
+
+                                ?
+
+                                selectedSeats.join(", ")
+
+                                :
+
+                                " None"
+
+                        }
+
                     </span>
 
                 </h2>
+
 
 
                 <button
@@ -185,7 +272,8 @@ function SeatSelection() {
 
                     onClick={() => {
 
-                        if(selectedSeat){
+                        // CHECK SEAT SELECTED
+                        if (selectedSeats.length > 0) {
 
                             navigate(
                                 "/checkout",
@@ -197,8 +285,12 @@ function SeatSelection() {
                                         departure,
                                         destination,
                                         date,
-                                        selectedSeat,
-                                        passengers
+
+                                        // MULTIPLE SEATS
+                                        selectedSeats,
+
+                                        passengers,
+                                        isboard
 
                                     }
 
@@ -207,10 +299,10 @@ function SeatSelection() {
 
                         }
 
-                        else{
+                        else {
 
                             alert(
-                                "Please select a seat"
+                                "Please select at least one seat"
                             );
 
                         }

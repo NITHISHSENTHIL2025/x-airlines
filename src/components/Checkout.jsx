@@ -4,8 +4,32 @@ import { useState } from "react";
 function Checkout() {
 
     const location = useLocation();
-
     const navigate = useNavigate();
+
+    // NO DATA
+
+    if (!location.state) {
+
+        return (
+
+            <div
+                style={{
+                    textAlign: "center",
+                    marginTop: "100px"
+                }}
+            >
+
+                <h1>
+                    No Booking Found
+                </h1>
+
+            </div>
+
+        );
+
+    }
+
+    // GET DATA
 
     const {
 
@@ -13,36 +37,91 @@ function Checkout() {
         departure,
         destination,
         date,
-        selectedSeat,
-        passengers
+        selectedSeats = [],
+        passengers = 1,
+        isboard
 
-    } = location.state || {};
+    } = location.state;
 
-    const [name, setName] = useState("");
+    // PASSENGER DETAILS
 
-    const [email, setEmail] = useState("");
+    const [passengerDetails, setPassengerDetails] = useState(
 
-    const [phone, setPhone] = useState("");
+        Array.from(
+
+            { length: passengers },
+
+            () => ({
+
+                name: "",
+                age: "",
+                gender: ""
+
+            })
+
+        )
+
+    );
+
+    // POLICY
 
     const [agree, setAgree] = useState(false);
 
+    // HANDLE INPUTS
+
+    const handlePassengerChange = (
+
+        index,
+        field,
+        value
+
+    ) => {
+
+        const updatedPassengers = [
+
+            ...passengerDetails
+
+        ];
+
+        updatedPassengers[index][field] =
+            value;
+
+        setPassengerDetails(
+            updatedPassengers
+        );
+
+    };
+
+    // PRICE
+
     const ticketPrice =
-        flight.price * passengers;
+        (flight?.price || 0) * passengers;
 
     const boardingFee =
-        299 * passengers;
+        isboard
+        ? 299 * passengers
+        : 0;
 
     const totalAmount =
         ticketPrice + boardingFee;
 
+    // PAYMENT
 
     const handlePayment = () => {
 
-        if(
-            !name ||
-            !email ||
-            !phone
-        ){
+        // CHECK EMPTY FIELDS
+
+        const emptyField = passengerDetails.some(
+
+            (passenger) =>
+
+                !passenger.name ||
+                !passenger.age ||
+                !passenger.gender
+
+        );
+
+        if (emptyField) {
 
             alert(
                 "Fill all passenger details"
@@ -52,7 +131,9 @@ function Checkout() {
 
         }
 
-        if(!agree){
+        // CHECK POLICY
+
+        if (!agree) {
 
             alert(
                 "Accept Privacy Policy"
@@ -62,9 +143,72 @@ function Checkout() {
 
         }
 
+        // OLD TICKETS
+
+        const oldTickets = JSON.parse(
+
+            localStorage.getItem("tickets")
+
+        ) || [];
+
+        // CREATE SEPARATE TICKETS
+
+        passengerDetails.forEach(
+
+            (passenger, index) => {
+
+                const singleTicket = {
+
+                    flight,
+                    departure,
+                    destination,
+                    date,
+
+                    passengerName:
+                    passenger.name,
+
+                    passengerAge:
+                    passenger.age,
+
+                    passengerGender:
+                    passenger.gender,
+
+                    selectedSeat:
+                    selectedSeats[index],
+
+                    passengers: 1,
+
+                    totalAmount:
+                    flight.price +
+
+                    (isboard ? 299 : 0)
+
+                };
+
+                oldTickets.push(
+                    singleTicket
+                );
+
+            }
+
+        );
+
+        // SAVE
+
+        localStorage.setItem(
+
+            "tickets",
+
+            JSON.stringify(oldTickets)
+
+        );
+
+        // NAVIGATE
 
         navigate(
+
             "/payment",
+
             {
 
                 state: {
@@ -73,14 +217,15 @@ function Checkout() {
                     departure,
                     destination,
                     date,
-                    selectedSeat,
+                    passengerDetails,
+                    selectedSeats,
                     passengers,
-                    totalAmount,
-                    name
+                    totalAmount
 
                 }
 
             }
+
         );
 
     };
@@ -89,62 +234,147 @@ function Checkout() {
 
         <div className="checkout-page">
 
-
             {/* LEFT */}
 
-            <div className="checkout-left">
+            <div className="checkout-top">
 
-                <h1>
+                <h1 className="passengerd">
                     Passenger Details
                 </h1>
 
+                {
 
-                <input
-                    type="text"
-                    placeholder="Full Name"
-                    value={name}
-                    onChange={(e)=>
-                        setName(e.target.value)
-                    }
-                />
+                    passengerDetails.map(
 
+                        (passenger, index) => (
 
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                    value={email}
-                    onChange={(e)=>
-                        setEmail(e.target.value)
-                    }
-                />
+                            <div
+                                className="passenger-card"
+                                key={index}
+                            >
 
+                                <h2>
 
-                <input
-                    type="number"
-                    placeholder="Phone Number"
-                    value={phone}
-                    onChange={(e)=>
-                        setPhone(e.target.value)
-                    }
-                />
+                                    Passenger
+                                    {" "}
+                                    {index + 1}
 
+                                </h2>
+
+                                {/* NAME */}
+
+                                <input
+
+                                    type="text"
+
+                                    placeholder="Full Name"
+
+                                    value={passenger.name}
+
+                                    onChange={(e) =>
+
+                                        handlePassengerChange(
+
+                                            index,
+                                            "name",
+                                            e.target.value
+
+                                        )
+
+                                    }
+
+                                />
+
+                                {/* AGE */}
+
+                                <input
+
+                                    type="number"
+
+                                    placeholder="Age"
+
+                                    value={passenger.age}
+
+                                    onChange={(e) =>
+
+                                        handlePassengerChange(
+
+                                            index,
+                                            "age",
+                                            e.target.value
+
+                                        )
+
+                                    }
+
+                                />
+
+                                {/* GENDER */}
+
+                                <select
+
+                                    value={passenger.gender}
+
+                                    onChange={(e) =>
+
+                                        handlePassengerChange(
+
+                                            index,
+                                            "gender",
+                                            e.target.value
+
+                                        )
+
+                                    }
+
+                                >
+
+                                    <option value="">
+                                        Select Gender
+                                    </option>
+
+                                    <option value="Male">
+                                        Male
+                                    </option>
+
+                                    <option value="Female">
+                                        Female
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        )
+
+                    )
+
+                }
+
+                {/* POLICY */}
 
                 <div className="privacy-box">
 
                     <input
+
                         type="checkbox"
+
                         checked={agree}
+
                         onChange={() =>
                             setAgree(!agree)
                         }
+
                     />
 
                     <p>
 
-                        I agree to
-                        Privacy Policy
-                        and Terms &
-                        Conditions
+                        I agree to Privacy Policy
+                        and Terms & Conditions
 
                     </p>
 
@@ -152,119 +382,118 @@ function Checkout() {
 
             </div>
 
-
             {/* RIGHT */}
 
-            <div className="checkout-right">
+            <div className="checkout-final">
 
                 <h1>
                     Booking Summary
                 </h1>
 
+                <h2 className="flightnamesummary">
+
+                    {flight?.airline || "Flight"}
+                    {" "}
+                    Airlines
+
+                </h2>
 
                 <div className="summary-box">
 
-                    <h2>
-                        {flight.airline}
-                    </h2>
-
                     <p>
-                        {departure} → {destination}
+
+                        {departure}
+                        {" → "}
+                        {destination}
+
                     </p>
 
                     <p>
-                        Date: {date}
+
+                        Date:
+                        {" "}
+                        {date}
+
                     </p>
 
                     <p>
-                        Seat: {selectedSeat}
+
+                        Seats:
+                        {" "}
+
+                        {
+
+                            selectedSeats.length > 0
+
+                            ? selectedSeats.join(", ")
+
+                            : "No Seats"
+
+                        }
+
                     </p>
 
                     <p>
+
                         Passengers:
+                        {" "}
                         {passengers}
+
                     </p>
 
                 </div>
 
+                {/* PRICE */}
 
                 <div className="price-box">
 
                     <div className="price-row">
 
                         <p>
-                            Ticket Fare
-                        </p>
 
-                        <p>
+                            Ticket Fare :
+                            {" "}
                             ₹{ticketPrice}
+
                         </p>
 
                     </div>
-
 
                     <div className="price-row">
 
                         <p>
-                            Boarding Fee
-                        </p>
 
-                        <p>
+                            Boarding Fee :
+                            {" "}
                             ₹{boardingFee}
-                        </p>
 
-                    </div>
-
-
-                    <div className="price-row total-price">
-
-                        <p>
-                            Total Amount
-                        </p>
-
-                        <p>
-                            ₹{totalAmount}
                         </p>
 
                     </div>
 
                 </div>
 
+                <p className="totalamt">
+
+                    Total Amount :
+                    {" "}
+                    ₹{totalAmount}
+
+                </p>
+
+                {/* BUTTON */}
 
                 <button
 
-className="payment-btn"
+                    className="payment-btn"
 
-onClick={() => {
+                    onClick={handlePayment}
 
-navigate(
-"/payment",
-{
+                >
 
-state: {
+                    Proceed To Payment
 
-flight,
-departure,
-destination,
-date,
-selectedSeat,
-passengers,
-totalAmount,
-name
-
-}
-
-}
-
-);
-
-}}
-
->
-
-Proceed To Payment
-
-</button>
+                </button>
 
             </div>
 

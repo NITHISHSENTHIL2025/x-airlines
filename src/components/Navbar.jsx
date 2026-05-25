@@ -54,7 +54,7 @@ About
 </li>
 
 <li>
-{currentUser?(<Link to="/my-bookings" className="home-link">
+{currentUser?(<Link to="/Mybookings" className="home-link">
 My Bookings
 </Link>):null}
 

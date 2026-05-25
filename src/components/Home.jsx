@@ -26,6 +26,7 @@ function Home() {
     const [showDestinationDropdown,
         setShowDestinationDropdown] =
         useState(false);
+        console.log(currentUser.firstName)
 
 
     const popularPlaces = [
@@ -437,7 +438,8 @@ function Home() {
                                                 departure,
                                                 destination,
                                                 date,
-                                                passengers
+                                                passengers,
+                                                name : currentUser.firstName
 
                                             }
 

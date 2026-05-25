@@ -7,7 +7,9 @@ function CreateAccount() {
         lastName: "",
         firstName: "",
         email: "",
-        password: ""
+        password: "",
+        address:"",
+        boy:""
     });
     function handleChange(event) {
 
@@ -22,7 +24,9 @@ function CreateAccount() {
             firstName: prevForm.firstName,
             lastName: prevForm.lastName,
             email: prevForm.email,
-            password: prevForm.password
+            password: prevForm.password,
+            address:prevForm.address,
+            boy:prevForm.boy
 
         };
 
@@ -43,9 +47,10 @@ function CreateAccount() {
 
     if (
         !form.firstName ||
-        !form.lastName ||
         !form.email ||
-        !form.password
+        !form.password||
+        !form.address||
+        !form.boy
     ) {
 
         window.alert("Please fill all fields");
@@ -89,6 +94,7 @@ function CreateAccount() {
                 <input id="name"
                     type="text"
                     placeholder="First Name"
+                    minLength={4}
                     name="firstName"
                     value={form.firstName}
                     onChange={handleChange}
@@ -96,7 +102,7 @@ function CreateAccount() {
 
                 <input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder="Last Name (Optional)"
                     name="lastName"
                     value={form.lastName}
                     onChange={handleChange}
@@ -113,22 +119,27 @@ function CreateAccount() {
                     type="password"
                     placeholder="Password"
                     name="password"
+                    minLength={8}
+                    maxLength={16}
                     value={form.password}
                     onChange={handleChange}
                 />
                 <input
                     type="text"
                     placeholder="address"
-                    name="password"
-                    value={form.password}
+                    name="address"
+                    value={form.address}
                     onChange={handleChange}
+                    maxLength={40}
                 />
                 <input
                     type="Number"
                     placeholder="Year of Birth"
-                    name="password"
-                    value={form.password}
+                    name="boy"
+                    value={form.boy}
                     onChange={handleChange}
+                    min="1920"
+                    max="2008"
                 />
 
                 <button type="submit" className="create-account-button" >

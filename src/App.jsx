@@ -10,6 +10,8 @@ import Footer from "./components/footer";
 import SeatSelection from "./components/SeatSelection";
 import Checkout from "./components/Checkout";
 import Payment from "./components/Payment";
+import Tickets from "./components/ticket";
+import Mybookings from "./components/mybooking";
 
 function App() {
 
@@ -58,6 +60,12 @@ function App() {
           path="/payment"
           element={<Payment />}
         />
+        <Route
+        path="/mybookings"
+        element={<Mybookings/>}/>
+        <Route
+        path="/ticket"
+        element={<Tickets/>}/>
 
       </Routes>
 
