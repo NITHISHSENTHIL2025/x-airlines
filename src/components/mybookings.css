@@ -1,0 +1,16 @@
+
+.bookings{
+
+min-height:100vh;
+
+padding:50px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:40px;
+
+align-items:center;
+
+}

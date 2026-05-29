@@ -1,0 +1,9 @@
+
+.checkout-page{
+    background-color: #e6e6e6;
+    margin: 80px;
+    padding: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}

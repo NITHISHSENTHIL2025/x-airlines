@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "./passengerdetails.css"
+import "./Checkout.css"
 
 function Checkout() {
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import air from "../assets/airs.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./Home.css";
 function Home() {
 
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Home() {
     const [showDestinationDropdown,
         setShowDestinationDropdown] =
         useState(false);
-        console.log(currentUser.firstName)
+        
 
 
     const popularPlaces = [

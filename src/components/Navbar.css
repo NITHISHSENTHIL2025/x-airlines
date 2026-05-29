@@ -1,0 +1,84 @@
+
+    .homenav {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        width: 100%;
+
+        height: 70px;
+
+        padding: 0 5%;
+
+        position: sticky;
+
+        top: 0;
+
+        z-index: 1000;
+
+        background:
+            rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+
+        border-bottom:
+            1px solid rgba(255, 255, 255, 0.3);
+
+        box-shadow:
+            0 4px 20px rgba(0, 0, 0, 0.04);
+
+    }
+
+    .home-title {
+
+        font-size: 2rem;
+
+        font-weight: 700;
+
+        letter-spacing: -1px;
+
+        color: #1D1D1F;
+
+    }
+
+    .home-links {
+
+        list-style: none;
+
+        display: flex;
+
+        gap: 35px;
+
+    }
+
+    .home-link,
+    .logout-btn {
+
+        text-decoration: none;
+
+        color: #6E6E73;
+
+        font-size: 15px;
+
+        font-weight: 500;
+
+        transition: 0.3s ease;
+
+        background: none;
+
+        border: none;
+
+        cursor: pointer;
+
+    }
+
+    .home-link:hover,
+    .logout-btn:hover {
+
+        color: #000000;
+
+    }

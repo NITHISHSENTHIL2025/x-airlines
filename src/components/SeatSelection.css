@@ -1,0 +1,359 @@
+
+    .seat-page{
+
+    min-height:100vh;
+
+    padding:40px;
+
+    background:#f3f4f6;
+
+    }
+
+
+    /* TOP */
+
+    .seat-top{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+    }
+
+    .seat-top h1{
+
+    font-size:58px;
+
+    font-weight:800;
+
+    color:#111827;
+
+    margin-bottom:15px;
+
+    }
+
+    .seat-top h2{
+
+    font-size:36px;
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+    }
+
+    .seat-top p{
+
+    font-size:18px;
+
+    color:#6b7280;
+
+    margin-top:5px;
+
+    }
+
+
+    /* AIRPLANE */
+
+    .airplane-wrapper{
+
+    width:700px;
+
+    margin:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    }
+
+
+    /* FRONT */
+
+    .plane-front{
+
+    width:220px;
+
+    height:140px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #111827,
+    #1f2937
+    );
+
+    border-radius:
+    120px 120px 40px 40px;
+
+    position:relative;
+
+    margin-bottom:10px;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.1);
+
+    }
+
+
+    /* GLASS */
+
+    .cockpit-glass{
+
+    width:40px;
+
+    height:18px;
+
+    background:#60a5fa;
+
+    position:absolute;
+
+    top:28px;
+
+    left:70px;
+
+    border-radius:10px;
+
+    }
+
+    .cockpit-glass2{
+
+    width:40px;
+
+    height:18px;
+
+    background:#60a5fa;
+
+    position:absolute;
+
+    top:28px;
+
+    right:70px;
+
+    border-radius:10px;
+
+    }
+
+
+    /* BODY */
+
+    .plane-body{
+
+    background:white;
+
+    width:420px;
+
+    padding:40px;
+
+    border-radius:40px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    }
+
+
+    /* ROW */
+
+    .seat-row{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    }
+
+
+    /* AISLE */
+
+    .aisle{
+
+    width:45px;
+
+    }
+
+
+    /* SEAT */
+
+    .seat{
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:18px;
+
+    margin:6px;
+
+    background:#f3f4f6;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.05);
+
+    }
+
+
+    .seat:hover{
+
+    transform:translateY(-5px);
+
+    background:#2563eb;
+
+    color:white;
+
+    }
+
+
+    /* SELECTED */
+
+    .selected-seat{
+
+    background:#2563eb;
+
+    color:white;
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,0.35);
+
+    }
+
+
+    /* BOOKED */
+
+    .booked-seat{
+
+    background:#9ca3af;
+
+    color:white;
+
+    cursor:not-allowed;
+
+    }
+
+
+    /* BOTTOM */
+
+    .seat-bottom{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    }
+
+    .seat-bottom h2{
+
+    font-size:30px;
+
+    margin-bottom:25px;
+
+    color:#111827;
+
+    }
+
+    .seat-bottom span{
+
+    color:#2563eb;
+
+    font-weight:700;
+
+    }
+
+
+    /* BUTTON */
+
+    .confirm-seat-btn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+    );
+
+    border:none;
+
+    padding:18px 45px;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+
+    }
+
+
+    .confirm-seat-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 12px 25px rgba(37,99,235,0.35);
+
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+    .airplane-wrapper{
+
+    width:100%;
+
+    }
+
+    .plane-body{
+
+    width:100%;
+
+    padding:20px;
+
+    }
+
+    .seat{
+
+    width:48px;
+
+    height:48px;
+
+    font-size:13px;
+
+    }
+
+    .aisle{
+
+    width:20px;
+
+    }
+
+    }

@@ -1,0 +1,102 @@
+
+.passengerd{
+    font-size: 40px;
+}
+.passenger-card{
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+}
+.passenger-card input{
+    width: 290px;
+    height: 50px;
+    margin-right: 20px;
+    padding: 20px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.14);
+    font-weight: bold;
+    
+}
+.passenger-card select{
+    width: 290px;
+    height: 50px;
+    margin-right: 20px;
+    padding-left: 20px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.14);
+    font-weight: bold;
+}
+.passenger-card h2{
+    margin-bottom: 20px;
+}
+.privacy-box{
+    margin-left: 40px;
+    display: flex;
+    gap: 20px;
+    margin: 40px;
+}
+.privacy-box input{
+    width: 100px;
+    padding: 20px;
+    outline: none;
+    border: none;
+    
+    
+}
+.privacy-box p{
+    font-weight: bolder;
+}
+.checkout-final{
+    margin-top: 20px;
+    background-color: #ededed;
+   
+    padding: 20px;
+    border-radius: 30px;
+}
+.flightnamesummary{
+    font-size: 50px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    
+}
+.summary-box p{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #575757;
+}
+.summary-box{
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    border-bottom: #6b6b6b 1px solid;
+}
+.price-box p{
+    font-size: 20px;
+    font-weight: bold;
+    color: #575757;
+
+}
+
+.price-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px;
+}
+.totalamt{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}

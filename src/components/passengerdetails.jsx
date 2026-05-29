@@ -1,3 +1,4 @@
+import "./passengerdetails.css"
 function PassengerDetails({
 
     passenger,

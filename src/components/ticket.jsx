@@ -1,4 +1,5 @@
 import Qr from "../assets/qr.png";
+import "./ticket.css"
 
 function Ticket({ ticketData }) {
 
