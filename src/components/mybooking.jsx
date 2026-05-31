@@ -5,20 +5,27 @@ function MyBookings() {
     const tickets = JSON.parse(
 
         localStorage.getItem("tickets")
+    
 
     ) || [];
-
+    const cu = JSON.parse(
+    localStorage.getItem("currentUser")
+) || {};
+    const myTickets = tickets.filter(
+    ticket =>
+    ticket.current === cu.email
+);
     return (
 
         <div className="bookings">
 
             {
 
-                tickets.length > 0
+                myTickets.length > 0
 
                 ?
 
-                tickets.map((ticket, index) => (
+                myTickets.map((ticket, index) => (
 
                     <Ticket
                         key={index}

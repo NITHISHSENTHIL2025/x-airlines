@@ -108,7 +108,11 @@ function Checkout() {
         ticketPrice + boardingFee;
 
     // PAYMENT
+    const cu =  JSON.parse(
 
+            localStorage.getItem("currentUser")
+
+        ) || "";
     const handlePayment = () => {
 
         // CHECK EMPTY FIELDS
@@ -145,65 +149,7 @@ function Checkout() {
 
         }
 
-        // OLD TICKETS
-
-        const oldTickets = JSON.parse(
-
-            localStorage.getItem("tickets")
-
-        ) || [];
-
-        // CREATE SEPARATE TICKETS
-
-        passengerDetails.forEach(
-
-            (passenger, index) => {
-
-                const singleTicket = {
-
-                    flight,
-                    departure,
-                    destination,
-                    date,
-
-                    passengerName:
-                    passenger.name,
-
-                    passengerAge:
-                    passenger.age,
-
-                    passengerGender:
-                    passenger.gender,
-
-                    selectedSeat:
-                    selectedSeats[index],
-
-                    passengers: 1,
-
-                    totalAmount:
-                    flight.price +
-
-                    (isboard ? 299 : 0)
-
-                };
-
-                oldTickets.push(
-                    singleTicket
-                );
-
-            }
-
-        );
-
-        // SAVE
-
-        localStorage.setItem(
-
-            "tickets",
-
-            JSON.stringify(oldTickets)
-
-        );
+        
 
         // NAVIGATE
 
@@ -215,16 +161,17 @@ function Checkout() {
 
                 state: {
 
-                    flight,
-                    departure,
-                    destination,
-                    date,
-                    passengerDetails,
-                    selectedSeats,
-                    passengers,
-                    totalAmount
+    flight,
+    departure,
+    destination,
+    date,
+    passengerDetails,
+    selectedSeats,
+    passengers,
+    totalAmount,
+    isboard
 
-                }
+}
 
             }
 

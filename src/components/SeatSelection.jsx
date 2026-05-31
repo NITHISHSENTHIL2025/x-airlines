@@ -8,6 +8,22 @@ function SeatSelection() {
     const navigate = useNavigate();
 
     const location = useLocation();
+    if (!location.state) {
+
+    return (
+
+        <h1
+            style={{
+                textAlign:"center",
+                marginTop:"100px"
+            }}
+        >
+            No Flight Selected
+        </h1>
+
+    );
+
+}
 
     const {
         flight,

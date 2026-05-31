@@ -6,20 +6,39 @@ import "./payment.css"
 function Payment() {
 
     const location = useLocation();
+    if (!location.state) {
+
+    return (
+
+        <h1
+            style={{
+                textAlign:"center",
+                marginTop:"100px"
+            }}
+        >
+            No Payment Data
+        </h1>
+
+    );
+
+}
 
     const navigate = useNavigate();
 
-    const {
-        totalAmount,
-        flight,
-        departure,
-        destination,
-        date,
-        selectedSeat,
-        passengers,
-        name,isboard
-    } = location.state || {};
-    console.log(isboard)
+   const {
+
+    totalAmount,
+    flight,
+    departure,
+    destination,
+    date,
+    selectedSeats,
+    passengers,
+    passengerDetails,
+    isboard
+
+} = location.state || {};
+   
 
     const [paymentMethod,
         setPaymentMethod] = useState("UPI");
@@ -34,11 +53,74 @@ function Payment() {
 
     setTimeout(() => {
 
+        const cu = JSON.parse(
+
+            localStorage.getItem("currentUser")
+
+        );
+
+        const oldTickets = JSON.parse(
+
+            localStorage.getItem("tickets")
+
+        ) || [];
+
+        passengerDetails.forEach(
+
+            (passenger, index) => {
+
+                const singleTicket = {
+
+                    flight,
+                    departure,
+                    destination,
+                    date,
+
+                    current: cu.email,
+
+                    passengerName:
+                    passenger.name,
+
+                    passengerAge:
+                    passenger.age,
+
+                    passengerGender:
+                    passenger.gender,
+
+                    selectedSeat:
+                    selectedSeats[index],
+
+                    passengers: 1,
+
+                    totalAmount:
+                    flight.price +
+
+                    (isboard ? 299 : 0)
+
+                };
+
+                oldTickets.push(
+                    singleTicket
+                );
+
+            }
+
+        );
+
+        localStorage.setItem(
+
+            "tickets",
+
+            JSON.stringify(oldTickets)
+
+        );
+
         navigate("/Mybookings");
 
     }, 3000);
 
 }
+
 
 
     return (
