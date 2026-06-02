@@ -30,11 +30,10 @@
     align-items:center;
 
     background:
-    linear-gradient(
-    135deg,
-    #0f172a,
-    #111827
-    );
+            linear-gradient(135deg,
+                #111111,
+                #1D1D1F,
+                #2C2C2E);
 
     padding:35px;
 
@@ -97,9 +96,9 @@
 
     .price{
 
-    background:#1f2937;
+    background:#ececec;
 
-    color:white;
+    color:rgb(54, 54, 54);
 
     border:none;
 
@@ -121,7 +120,7 @@
 
     .price:hover{
 
-    background:#374151;
+    color: black;
 
     }
 
@@ -211,12 +210,12 @@
 
     .flight-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-2px);
 
-    border-color:#2563eb;
+    
 
     box-shadow:
-    0 20px 40px rgba(37,99,235,0.15);
+    0 20px 40px rgba(0, 0, 0, 0.15);
 
     }
 
@@ -268,7 +267,11 @@
 
     font-weight:800;
 
-    color:#2563eb;
+    color:
+            linear-gradient(135deg,
+                #111111,
+                #1D1D1F,
+                #2C2C2E);
 
     white-space:nowrap;
 
@@ -357,8 +360,8 @@
     background:
     linear-gradient(
     135deg,
-    #2563eb,
-    #1d4ed8
+    #bcbcbc,
+    #383838
     );
 
     color:white;
@@ -384,7 +387,7 @@
     transform:scale(1.05);
 
     box-shadow:
-    0 10px 20px rgba(37,99,235,0.3);
+    0 5px 10px rgba(0, 0, 0, 0.3);
 
     }
 

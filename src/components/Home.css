@@ -141,10 +141,12 @@
         transform: translateY(-2px);
 
         box-shadow:
-            0 15px 35px rgba(0, 113, 227, 0.12);
+            0 15px 35px rgba(34, 34, 34, 0.12);
 
     }
-
+    .loads{
+        width: 60px;
+    }
     .home-search-container input {
 
         flex: 1;
@@ -377,7 +379,7 @@
         font-size: 15px;
 
         line-height: 1.7;
-
+        
         color: #6E6E73;
 
     }

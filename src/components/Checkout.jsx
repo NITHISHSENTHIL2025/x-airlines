@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./passengerdetails.css"
 import "./Checkout.css"
+import Loading2 from "../assets/loader.svg"
 
 function Checkout() {
 
@@ -33,6 +34,7 @@ function Checkout() {
 
     // GET DATA
 
+    const [load, setLoad] = useState(false);
     const {
 
         flight,
@@ -101,82 +103,57 @@ function Checkout() {
 
     const boardingFee =
         isboard
-        ? 299 * passengers
-        : 0;
+            ? 299 * passengers
+            : 0;
 
     const totalAmount =
         ticketPrice + boardingFee;
 
     // PAYMENT
-    const cu =  JSON.parse(
+    const cu = JSON.parse(
 
-            localStorage.getItem("currentUser")
+        localStorage.getItem("currentUser")
 
-        ) || "";
+    ) || "";
     const handlePayment = () => {
 
         // CHECK EMPTY FIELDS
-
         const emptyField = passengerDetails.some(
-
             (passenger) =>
-
                 !passenger.name ||
                 !passenger.age ||
                 !passenger.gender
-
         );
+        
 
         if (emptyField) {
-
-            alert(
-                "Fill all passenger details"
-            );
-
+            alert("Fill all passenger details");
             return;
-
         }
 
         // CHECK POLICY
-
         if (!agree) {
-
-            alert(
-                "Accept Privacy Policy"
-            );
-
+            alert("Accept Privacy Policy");
             return;
-
         }
 
-        
-
-        // NAVIGATE
-
-        navigate(
-
-            "/payment",
-
-            {
-
+        // NAVIGATE AFTER 3 SECONDS
+        setLoad(true);
+        setTimeout(() => {
+            navigate("/payment", {
                 state: {
-
-    flight,
-    departure,
-    destination,
-    date,
-    passengerDetails,
-    selectedSeats,
-    passengers,
-    totalAmount,
-    isboard
-
-}
-
-            }
-
-        );
-
+                    flight,
+                    departure,
+                    destination,
+                    date,
+                    passengerDetails,
+                    selectedSeats,
+                    passengers,
+                    totalAmount,
+                    isboard
+                }
+            });
+        }, 3000);
     };
 
     return (
@@ -374,9 +351,9 @@ function Checkout() {
 
                             selectedSeats.length > 0
 
-                            ? selectedSeats.join(", ")
+                                ? selectedSeats.join(", ")
 
-                            : "No Seats"
+                                : "No Seats"
 
                         }
 
@@ -436,11 +413,15 @@ function Checkout() {
 
                     className="payment-btn"
 
-                    onClick={handlePayment}
+                    onClick={handlePayment}style={{
+        padding: load ? "0" : "24px"
+    }}
 
                 >
 
-                    Proceed To Payment
+
+                    {load ? (<img src={Loading2} className="loader" />) :
+                        "Proceed to payment"}
 
                 </button>
 

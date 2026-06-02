@@ -2,6 +2,9 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./payment.css"
+import Loading2 from "../assets/loader.svg"
+import { useEffect } from "react";
+import { useRef } from "react";
 
 function Payment() {
 
@@ -24,6 +27,10 @@ function Payment() {
 }
 
     const navigate = useNavigate();
+    const Ref = useRef();
+    useEffect(() => {
+        Ref.current.focus();
+    },[])
 
    const {
 
@@ -236,6 +243,7 @@ function Payment() {
                             type="text"
                             placeholder="Enter UPI ID"
                             className="payment-input"
+                            ref={Ref}
                         />
 
                     )
@@ -253,6 +261,7 @@ function Payment() {
                                 type="text"
                                 placeholder="Card Number"
                                 className="payment-input"
+                                ref={Ref}
                             />
 
                             <input
@@ -328,7 +337,10 @@ function Payment() {
 
                         ?
 
-                        "Processing Payment..."
+                        (<img 
+                            src={Loading2}
+                            alt="Loading" className="loadings"/>
+                        )
 
                         :
 

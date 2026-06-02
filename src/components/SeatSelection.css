@@ -36,7 +36,7 @@
 
     font-size:36px;
 
-    color:#2563eb;
+    color:#242424;
 
     margin-bottom:10px;
 
@@ -106,7 +106,8 @@
 
     height:18px;
 
-    background:#60a5fa;
+    background:#cfcfcf;
+    margin-right: 5px;
 
     position:absolute;
 
@@ -121,10 +122,10 @@
     .cockpit-glass2{
 
     width:40px;
-
+        margin-left: 5px;
     height:18px;
 
-    background:#60a5fa;
+    background:#cfcfcf;
 
     position:absolute;
 
@@ -219,7 +220,7 @@
 
     transform:translateY(-5px);
 
-    background:#2563eb;
+    background:#303030;
 
     color:white;
 
@@ -230,12 +231,12 @@
 
     .selected-seat{
 
-    background:#2563eb;
+    background:#1f1f1f;
 
     color:white;
 
     box-shadow:
-    0 10px 25px rgba(37,99,235,0.35);
+    0 10px 25px rgba(58, 58, 58, 0.35);
 
     }
 
@@ -275,7 +276,7 @@
 
     .seat-bottom span{
 
-    color:#2563eb;
+    color:#535353;
 
     font-weight:700;
 
@@ -289,8 +290,8 @@
     background:
     linear-gradient(
     135deg,
-    #2563eb,
-    #1d4ed8
+    #525252,
+    #242424
     );
 
     border:none;
@@ -317,7 +318,7 @@
     transform:translateY(-4px);
 
     box-shadow:
-    0 12px 25px rgba(37,99,235,0.35);
+    0 12px 25px rgba(0, 0, 0, 0.35);
 
     }
 

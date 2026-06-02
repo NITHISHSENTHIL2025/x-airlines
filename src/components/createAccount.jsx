@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useRef } from "react";
 import "./loginandcreateacc.css"
 function CreateAccount() {
     const navigate = useNavigate();
@@ -12,8 +14,12 @@ function CreateAccount() {
         address:"",
         boy:""
     });
+    const emailRef = useRef();
+    useEffect(() => {
+        emailRef.current.focus();
+    },[])
     function handleChange(event) {
-
+    
     const name = event.target.name;
 
     const value = event.target.value;
@@ -99,6 +105,7 @@ function CreateAccount() {
                     name="firstName"
                     value={form.firstName}
                     onChange={handleChange}
+                    ref={emailRef}
                 />
 
                 <input

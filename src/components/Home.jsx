@@ -3,6 +3,7 @@ import air from "../assets/airs.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import Loading2 from "../assets/loader.svg"
 function Home() {
 
     const navigate = useNavigate();
@@ -26,6 +27,8 @@ function Home() {
     const [showDestinationDropdown,
         setShowDestinationDropdown] =
         useState(false);
+    const cu = JSON.parse(localStorage.getItem("currentUser"))
+    const [load,setLoad] = useState(false);
         
 
 
@@ -404,6 +407,8 @@ function Home() {
                             className="home-search-button"
 
                             onClick={() => {
+                                if(cu!==null){
+                                
 
                                 if (
 
@@ -418,7 +423,7 @@ function Home() {
                                 ) {
 
                                     if (
-
+                                        
                                         validDeparture
                                         &&
                                         validDestination
@@ -430,7 +435,8 @@ function Home() {
                                         passengers <= 20
 
                                     ) {
-
+                                        setLoad(true)
+                                        setTimeout(()=>{
                                         navigate("/flights", {
 
                                             state: {
@@ -445,7 +451,7 @@ function Home() {
 
                                         });
 
-                                    }
+                                    },5000)}
 
                                     else {
 
@@ -461,11 +467,15 @@ function Home() {
 
                                 }
 
-                            }}
+                            }
+                        else{
+                            window.alert("Please Login First")
+                        }}}
+                            
 
                         >
-
-                            ✈︎
+                            {load?(<img src={Loading2} className="loads"/>):
+                            "✈︎"}
 
                         </button>
 
