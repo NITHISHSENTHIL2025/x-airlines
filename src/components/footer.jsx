@@ -1,6 +1,7 @@
 import "./footer.css"
+import { Link, useNavigate } from "react-router-dom";
 function Footer() {
-
+const navigate = useNavigate();
 return (
 
 <footer className="footer">
@@ -18,7 +19,7 @@ with comfort and best prices.
 
 <div className="footer-links">
 
-<span>Support</span>
+<Link to="/support" className="footer-link">Support</Link>
 
 </div>
 

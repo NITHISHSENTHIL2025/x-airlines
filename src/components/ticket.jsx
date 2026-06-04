@@ -15,7 +15,7 @@ function Ticket({ ticketData }) {
             <div className="ticketnav">
 
                 <h1>
-                    {flightname}
+                    {flightname+"   "} Airlines
                 </h1>
 
             </div>
@@ -42,11 +42,11 @@ function Ticket({ ticketData }) {
 
                 <h1 className="Tickettravel">
 
-                    {ticketData.departure}
+                    {ticketData.departure+"     "}
 
-                    ➤
+                    ➤  
 
-                    {ticketData.destination}
+                    {"     "+ticketData.destination}
 
                 </h1>
 

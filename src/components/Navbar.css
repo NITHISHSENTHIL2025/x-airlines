@@ -1,4 +1,7 @@
-
+.airp{
+    width: 150px;
+    rotate: 15deg;
+}
     .homenav {
 
         display: flex;

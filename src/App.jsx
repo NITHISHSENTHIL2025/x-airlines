@@ -12,6 +12,7 @@ import Checkout from "./components/Checkout";
 import Payment from "./components/Payment";
 
 import Mybookings from "./components/mybooking";
+import Support from "./components/support";
 
 function App() {
 
@@ -63,6 +64,9 @@ function App() {
         <Route
         path="/mybookings"
         element={<Mybookings/>}/>
+        <Route
+        path="/support"
+        element={<Support/>}/>
         
 
       </Routes>

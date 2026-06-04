@@ -1,0 +1,56 @@
+.supportcontent{
+    display: flex;
+    flex-direction: column;
+    
+    border: 1px solid #333;
+}
+.support button{
+    height : 100px;
+    width: 300px;
+}
+.support{
+display: flex;
+margin: 70px ;
+background:
+            rgba(255, 255, 255, 0.75);
+border-radius: 30px;
+overflow: hidden;
+max-height: 400px;
+box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+
+}
+.supports{
+    overflow-y: auto;
+    width: 100%;
+    margin: 40px;
+}
+.supportcontent button{
+    background:
+            linear-gradient(135deg,
+                #111111,
+                #1D1D1F,
+                #2C2C2E);
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    
+}
+.supportdetails h1{
+    color: #000000;
+}
+.supportdetails h2{
+    color: #282828;
+}
+.supportdetails p,li{
+    color: #7c7c7c;
+}
+.supportcontent button:hover{
+  font-size: 25px;
+}
+.supportdetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

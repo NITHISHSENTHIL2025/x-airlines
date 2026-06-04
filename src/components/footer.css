@@ -104,3 +104,12 @@
         font-size: 14px;
 
     }
+    .footer-link {
+
+        color: #D4D4D8;
+
+        text-decoration: none;
+
+        transition: 0.3s ease;
+
+    }

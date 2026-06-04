@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css"
-
+import Airp from "../assets/airlogo.png"
+import { useState } from "react";
 function Navbar() {
 
 const navigate = useNavigate();
+const [tit,settit] = useState(true);
 
 const currentUser =
 JSON.parse(localStorage.getItem("currentUser"));
@@ -19,10 +21,10 @@ navigate("/login");
 return (
 
 <nav className="homenav">
+{tit?
+<img src={Airp
 
-<h1 className="home-title">
-X Airlines
-</h1>
+} className="airp" onClick={()=>settit(false)}/>:<h1 onClick={()=>settit(true)}>X Airlines</h1>}
 
 <ul className="home-links">
 
