@@ -2,6 +2,7 @@ import Ticket from "./ticket";
 import "./mybookings.css"
 function MyBookings() {
 
+    
     const tickets = JSON.parse(
 
         localStorage.getItem("tickets")

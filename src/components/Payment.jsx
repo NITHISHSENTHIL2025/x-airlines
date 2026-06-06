@@ -7,7 +7,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 
 function Payment() {
-
+    const flightnum =   Math.round(Math.random()*100-1);
+    
     const location = useLocation();
     if (!location.state) {
 
@@ -85,7 +86,7 @@ function Payment() {
                     date,
 
                     current: cu.email,
-
+                    flightnumber:flightnum,
                     passengerName:
                     passenger.name,
 
