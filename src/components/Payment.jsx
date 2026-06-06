@@ -25,6 +25,7 @@ function Payment() {
     );
 
 }
+    
 
     const navigate = useNavigate();
     const Ref = useRef();
@@ -238,13 +239,22 @@ function Payment() {
                 {
 
                     paymentMethod === "UPI" && (
-
+                        <div className="Upi">
                         <input
                             type="text"
                             placeholder="Enter UPI ID"
                             className="payment-input"
                             ref={Ref}
                         />
+                        <select className="selectupi">
+                            <option value="@okaxis">@okaxis</option>
+                            <option>@okicic</option>
+                            <option>@okybl</option>
+                            <option>@oksbi</option>
+                            <option>@okhdfcbank</option>
+                        </select>
+                        </div>
+                        
 
                     )
 

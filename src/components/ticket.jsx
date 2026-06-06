@@ -49,6 +49,12 @@ function Ticket({ ticketData }) {
                     {"     "+ticketData.destination}
 
                 </h1>
+                <div className="Ticketinfo">
+                <p className="tp1">Departure Time  :  4:00 pm </p>
+                <p className="tp2">Gate  :  8</p>
+                <p className="tp3">Flight  :  85SKL</p>
+                <p>Seat : {ticketData.selectedSeat}</p>
+                </div>
 
             </div>
 

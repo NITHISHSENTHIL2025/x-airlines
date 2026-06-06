@@ -12,7 +12,19 @@ TICKET
     flex-wrap: wrap;
 
 }
-
+.Ticketinfo{
+    display: flex;
+   color:#000000;
+   margin-left: 80px;
+    gap: 10px;
+    flex-wrap: wrap;
+  
+    justify-content: space-between;
+}
+.tp1{
+    flex-basis: 60%;
+    margin-bottom: 10px;
+}
 .ticketnav {
     flex-basis: 70%;
     background-color: #151515;

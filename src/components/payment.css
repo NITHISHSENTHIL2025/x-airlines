@@ -192,8 +192,8 @@
     padding:18px;
 
     border:none;
-
-    border-radius:18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
 
     background:#f3f4f6;
 
@@ -214,7 +214,32 @@
 
 
     /* BUTTON */
+    .Upi{
+        display: flex;
 
+    }
+    .selectupi{
+        width:40%;
+
+    padding:18px;
+
+    border:none;
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+
+    background:#e9e9e9;
+
+    font-size:16px;
+        
+    outline:none;
+    }
+    .selectupi option{
+        background: #00000000;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+     backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
     .pay-now-btn{
 
     margin-top:10px;
