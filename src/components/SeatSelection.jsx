@@ -50,18 +50,95 @@ function SeatSelection() {
     ];
 
 
-
+    const leftSeats = [
+  ["1A", "1B", "1C"],
+  ["2A", "2B", "2C"],
+  ["3A", "3B", "3C"],
+  ["4A", "4B", "4C"],
+  ["5A", "5B", "5C"],
+  ["6A", "6B", "6C"],
+  ["7A", "7B", "7C"],
+  ["8A", "8B", "8C"],
+  ["9A", "9B", "9C"],
+  ["10A", "10B", "10C"],
+  ["11A", "11B", "11C"],
+  ["12A", "12B", "12C"]
+];
+const rightSeats = [
+  ["1D", "1E"],
+  ["2D", "2E"],
+  ["3D", "3E"],
+  ["4D", "4E"],
+  ["5D", "5E"],
+  ["6D", "6E"],
+  ["7D", "7E"],
+  ["8D", "8E"],
+  ["9D", "9E"],
+  ["10D", "10E"],
+  ["11D", "11E"],
+  ["12D", "12E"]
+];
     // SEAT ROWS
-    const seats = [
+    const seatRows = [
 
-        ["1A", "1B", "1C", "1D"],
-        ["2A", "2B", "2C", "2D"],
-        ["3A", "3B", "3C", "3D"],
-        ["4A", "4B", "4C", "4D"],
-        ["5A", "5B", "5C", "5D"],
-        ["6A", "6B", "6C", "6D"]
+        ["1A", "1B", "1C", "1D","1E"],
+        ["2A", "2B", "2C", "2D","2E"],
+        ["3A", "3B", "3C", "3D","3E"],
+        ["4A", "4B", "4C", "4D","4E"],
+        ["5A", "5B", "5C", "5D","5E"],
+        ["6A", "6B", "6C", "6D","6E"],
+        ["7A", "7B", "7C", "7D","7E"],
+        ["8A", "8B", "8C", "8D","8E"],
+        ["9A", "9B", "9C", "9D","9E"],
+        ["10A", "10B", "10C", "10D","10E"],
+        ["11A", "11B", "11C", "11D","11E"],
+        ["12A", "12B", "12C", "12D","12E"]
 
     ];
+
+    const seatsLeft = seatRows.map((row) => row.slice(0, 3));
+    const seatsRight = seatRows.map((row) => row.slice(3));
+
+    const renderSeat = (seat) => {
+        const isBooked = bookedSeats.includes(seat);
+        const isSelected = selectedSeats.includes(seat);
+
+        return (
+            <div key={seat} className="seat-wrapper">
+                <button
+                    disabled={
+                        isBooked ||
+                        (
+                            selectedSeats.length >= passengers &&
+                            !selectedSeats.includes(seat)
+                        )
+                    }
+                    onClick={() => {
+                        if (isSelected) {
+                            setSelectedSeats(
+                                selectedSeats.filter((s) => s !== seat)
+                            );
+                        } else {
+                            if (selectedSeats.length < passengers) {
+                                setSelectedSeats([...selectedSeats, seat]);
+                            } else {
+                                alert(`You can only select ${passengers} seats`);
+                            }
+                        }
+                    }}
+                    className={
+                        isBooked
+                            ? "seat booked-seat"
+                            : isSelected
+                                ? "seat selected-seat"
+                                : "seat"
+                    }
+                >
+                    {seat}
+                </button>
+            </div>
+        );
+    };
 
 
 
@@ -98,17 +175,12 @@ function SeatSelection() {
             <div className="airplane-wrapper">
 
 
-                {/* FRONT */}
-
-                <div className="plane-front">
-
-                    <div className="cockpit-glass"></div>
-
-                    <div className="cockpit-glass2"></div>
+                
+                <div className="mainplane">
+                <div className="planefront">
+                    <div className="frontshape"></div>
 
                 </div>
-
-
 
                 {/* BODY */}
 
@@ -116,7 +188,7 @@ function SeatSelection() {
 
                     {
 
-                        seats.map((row, rowIndex) => (
+                        leftSeats.map((row, rowIndex) => (
 
                             <div
                                 className="seat-row"
@@ -227,7 +299,7 @@ function SeatSelection() {
 
                                                 {
 
-                                                    seatIndex === 1 &&
+                                                    seatIndex === 2 &&
 
                                                     <div className="aisle"></div>
 
@@ -245,7 +317,7 @@ function SeatSelection() {
 
                         ))
 
-                    }
+                    }</div>
 
                 </div>
 

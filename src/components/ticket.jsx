@@ -2,7 +2,7 @@ import Qr from "../assets/qr.png";
 import "./ticket.css"
 
 function Ticket({ ticketData }) {
-    z
+    
     
     const flightname =
         ticketData?.flight?.airline || "X Airlines";
