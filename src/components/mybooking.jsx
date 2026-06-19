@@ -1,59 +1,44 @@
+import { useNavigate } from "react-router-dom";
 import Ticket from "./ticket";
-import "./mybookings.css"
+import "./mybookings.css";
+
 function MyBookings() {
+    const navigate = useNavigate();
+    const tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+    const cu = JSON.parse(localStorage.getItem("currentUser"));
 
-    
-    const tickets = JSON.parse(
+    // Guard against unauthenticated access
+    if (!cu?.email) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "100px" }}>
+                <h1>Please Login</h1>
+                <p>You must be logged in to view your bookings.</p>
+            </div>
+        );
+    }
 
-        localStorage.getItem("tickets")
-    
+    const myTickets = tickets.filter(ticket => ticket.current === cu.email);
 
-    ) || [];
-    const cu = JSON.parse(
-    localStorage.getItem("currentUser")
-) || {};
-    const myTickets = tickets.filter(
-    ticket =>
-    ticket.current === cu.email
-);
     return (
-
         <div className="bookings">
-
-            {
-
-                myTickets.length > 0
-
-                ?
-
+            {myTickets.length > 0 ? (
                 myTickets.map((ticket, index) => (
-
-                    <Ticket
-                        key={index}
-                        ticketData={ticket}
-                    />
-
+                    <Ticket key={ticket.pnr + ticket.selectedSeat} ticketData={ticket} />
                 ))
-
-                :
-
-                <h1
-                    style={{
-                        textAlign: "center",
-                        marginTop: "100px"
-                    }}
-                >
-
-                    No Bookings Found
-
-                </h1>
-
-            }
-
+            ) : (
+                <div style={{ textAlign: "center", marginTop: "100px" }}>
+                    <h1>No Bookings Found</h1>
+                    <p style={{ marginTop: "10px", color: "gray" }}>You haven't booked any flights yet.</p>
+                    <button 
+                        onClick={() => navigate("/")} 
+                        style={{ marginTop: "20px", padding: "10px 20px", cursor: "pointer", background: "#111827", color: "white", borderRadius: "8px" }}
+                    >
+                        Search Flights
+                    </button>
+                </div>
+            )}
         </div>
-
     );
-
 }
 
 export default MyBookings;

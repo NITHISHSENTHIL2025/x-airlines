@@ -7,8 +7,9 @@ function Navbar() {
 const navigate = useNavigate();
 const [tit,settit] = useState(true);
 
-const currentUser =
-JSON.parse(localStorage.getItem("currentUser"));
+const [currentUser,setCurrentUser] = useState(
+ JSON.parse(localStorage.getItem("currentUser"))
+);
 
 function handleLogout() {
 

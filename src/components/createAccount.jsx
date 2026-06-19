@@ -1,113 +1,79 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useRef } from "react";
-import "./loginandcreateacc.css"
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import "./loginandcreateacc.css";
+
 function CreateAccount() {
     const navigate = useNavigate();
+    const firstInputRef = useRef(null);
+
     const [form, setForm] = useState({
-        lastName: "",
         firstName: "",
+        lastName: "",
         email: "",
         password: "",
-        address:"",
-        boy:""
+        address: "",
+        boy: "" // Year of Birth
     });
-    const emailRef = useRef();
-    useEffect(() => {
-        emailRef.current.focus();
-    },[])
-    function handleChange(event) {
     
-    const name = event.target.name;
+    const [error, setError] = useState("");
 
-    const value = event.target.value;
+    useEffect(() => {
+        if (firstInputRef.current) {
+            firstInputRef.current.focus();
+        }
+    }, []);
 
-    setForm(function(prevForm) {
-
-        const updatedForm = {
-
-            firstName: prevForm.firstName,
-            lastName: prevForm.lastName,
-            email: prevForm.email,
-            password: prevForm.password,
-            address:prevForm.address,
-            boy:prevForm.boy
-
-        };
-
-        updatedForm[name] = value;
-
-        return updatedForm;
-
-    });
-
-}
-   function handleSubmit(event) {
-
-    event.preventDefault();
-
-    const usercheck =
-        JSON.parse(localStorage.getItem("users"))
-        || [];
-
-    if (
-        !form.firstName ||
-        !form.email ||
-        !form.password||
-        !form.address||
-        !form.boy
-    ) {
-
-        window.alert("Please fill all fields");
-
-        return;
+    // SUPERB FEATURE: Clean, scalable state handler
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setForm(prevForm => ({
+            ...prevForm,
+            [name]: value
+        }));
+        setError(""); // Clear error when user types
     }
 
-    const existingUser = usercheck.find(
-        user => user.email === form.email
-    );
+    function handleSubmit(event) {
+        event.preventDefault();
+        const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    if(existingUser) {
+        // Validation
+        if (!form.firstName.trim() || !form.email.trim() || !form.password || !form.address.trim() || !form.boy) {
+            return setError("Please fill in all required fields.");
+        }
 
-        window.alert(
-            "Email already exists"
-        );
+        const existingUser = users.find(user => user.email.toLowerCase() === form.email.toLowerCase());
+        if (existingUser) {
+            return setError("An account with this email already exists.");
+        }
 
-        return;
+        // Immutable push
+        const updatedUsers = [...users, form];
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        
+        // Auto-login the user immediately upon creation for better UX
+        localStorage.setItem("currentUser", JSON.stringify(form));
+        navigate("/", { replace: true });
     }
 
-    usercheck.push(form);
-
-    localStorage.setItem(
-        "users",
-        JSON.stringify(usercheck)
-    );
-
-    window.alert(
-        `Welcome ${form.firstName}`
-    );
-
-    navigate("/login",{ replace: true });
-
-}
     return (
         <div className="create-accountcard">
             <div className="create-accountT">
                 <h1 className="create-account-title">Create Account</h1>
             </div>
+            
             <form className="create-account-form" onSubmit={handleSubmit}>
-                <input id="name"
+                {error && <p style={{ color: "#ff4d4f", textAlign: "center", fontWeight: "bold" }}>{error}</p>}
+
+                <input
                     type="text"
-                    placeholder="First Name"
-                    minLength={4}
+                    placeholder="First Name *"
+                    minLength={2}
                     name="firstName"
                     value={form.firstName}
                     onChange={handleChange}
-                    ref={emailRef}
+                    ref={firstInputRef}
                 />
-
                 <input
                     type="text"
                     placeholder="Last Name (Optional)"
@@ -117,49 +83,45 @@ function CreateAccount() {
                 />
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Email Address *"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
                 />
-
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password *"
                     name="password"
                     minLength={8}
-                    maxLength={16}
+                    maxLength={20}
                     value={form.password}
                     onChange={handleChange}
                 />
                 <input
                     type="text"
-                    placeholder="address"
+                    placeholder="Full Address *"
                     name="address"
                     value={form.address}
                     onChange={handleChange}
-                    maxLength={40}
+                    maxLength={60}
                 />
                 <input
-                    type="Number"
-                    placeholder="Year of Birth"
+                    type="number"
+                    placeholder="Year of Birth *"
                     name="boy"
                     value={form.boy}
                     onChange={handleChange}
                     min="1920"
-                    max="2008"
+                    max={new Date().getFullYear() - 12} // Must be at least 12 years old
                 />
 
-                <button type="submit" className="create-account-button" >
+                <button type="submit" className="create-account-button">
                     Create Account
                 </button>
+                
                 <h3 className="or">Already have an account?</h3>
-                <Link to="/login" className="login-link">
-                    Login here.
-                </Link>
-
+                <Link to="/login" className="login-link">Login here.</Link>
             </form>
-
         </div>
     );
 }
